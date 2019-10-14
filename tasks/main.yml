@@ -1,0 +1,40 @@
+---
+  - name: Load bouncer version
+    become: True
+    shell: "dpkg -s bouncer | grep Version | awk -F: '{print $2}' | tr -d [:space:]"
+    register: bouncerversion
+    changed_when: False
+
+  - name: Upload package
+    become: True
+    when: bouncerversion.stdout != '0.1'
+    copy:
+      content: "{{ lookup('file', 'bouncer_0.1_amd64.deb') }}"
+      dest: /tmp/bouncer.deb
+      owner: root
+      group: root
+      mode: 0640
+
+  - name: Install package
+    become: True
+    when: bouncerversion.stdout != '0.1'
+    command: dpkg -i /tmp/bouncer.deb
+
+  - name: Ensure config directory exists
+    become: True
+    file:
+      path: /etc/bouncer
+      state: directory
+      owner: root
+      group: adm
+      mode: 0750
+
+  - name: Configure bouncer
+    become: True
+    template:
+      src: config.yml.j2
+      dest: /etc/bouncer/config.yml
+      owner: root
+      group: adm
+      mode: 0640
+    notify: restart bouncer

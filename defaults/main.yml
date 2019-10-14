@@ -1,0 +1,6 @@
+bouncer_database: 'radius'
+bouncer_user: 'radius'
+bouncer_password: 'supersecret'
+bouncer_host: '127.0.0.1'
+bouncer_port: '3306'
+bouncer_switch_secret: 'foo'

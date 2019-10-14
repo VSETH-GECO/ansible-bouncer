@@ -1,0 +1,7 @@
+---
+  - name: restart bouncer
+    become: True
+    service:
+      name: bouncer
+      enabled: yes
+      state: restarted
