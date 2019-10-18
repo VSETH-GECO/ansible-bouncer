@@ -5,4 +5,7 @@ password: '{{ bouncer_password  }}'
 host: '{{ bouncer_host }}'
 port: {{ bouncer_port }}
 switch-secret: '{{ bouncer_switch_secret }}'
-
+dtoken: '{{ bouncer_discord_token }}'
+dusers:
+{% for item in bouncer_discord_users %}  - {{ item }}
+{% endfor %}

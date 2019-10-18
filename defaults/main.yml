@@ -4,3 +4,5 @@ bouncer_password: 'supersecret'
 bouncer_host: '127.0.0.1'
 bouncer_port: '3306'
 bouncer_switch_secret: 'foo'
+bouncer_discord_token: ''
+bouncer_discord_users: []
