@@ -7,9 +7,9 @@
 
   - name: Upload package
     become: True
-    when: bouncerversion.stdout != '0.2'
+    when: bouncerversion.stdout != '0.3'
     copy:
-      content: "{{ lookup('file', 'bouncer_0.2_amd64.deb') }}"
+      content: "{{ lookup('file', 'bouncer_0.3_amd64.deb') }}"
       dest: /tmp/bouncer.deb
       owner: root
       group: root
@@ -17,7 +17,7 @@
 
   - name: Install package
     become: True
-    when: bouncerversion.stdout != '0.2'
+    when: bouncerversion.stdout != '0.3'
     command: dpkg -i /tmp/bouncer.deb
 
   - name: Ensure config directory exists
